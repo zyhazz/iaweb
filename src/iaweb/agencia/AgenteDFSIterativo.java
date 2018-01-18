@@ -1,10 +1,6 @@
 package iaweb.agencia;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import iaweb.agencia.Agente;
 import iaweb.util.*;
 

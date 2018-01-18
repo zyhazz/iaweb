@@ -7,7 +7,7 @@ import java.util.Collections;
 import iaweb.util.FSucessora;
 import iaweb.util.Node;
 
-public class Agente {
+public abstract class Agente {
 	protected ArrayList<Node> seq = new ArrayList<Node>();
 	protected ArrayList<Node> fringe = new ArrayList<Node>();//inicia vazia
 	protected Node node;
@@ -24,11 +24,7 @@ public class Agente {
 		return this.search(fringe.get(0));
 	}
 
-	protected boolean search(Node node) {
-		// TODO Auto-generated method stub
-		System.out.println("not");
-		return false;
-	}
+	public abstract boolean search(Node node);
 
 	public ArrayList<Node> getResult() {
 		// TODO Auto-generated method stub

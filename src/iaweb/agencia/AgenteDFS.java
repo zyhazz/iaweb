@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import iaweb.agencia.Agente;
-import iaweb.util.*;
 import iaweb.util.FSucessora;
 import iaweb.util.Node;
 
