@@ -12,6 +12,8 @@ public enum Romenia implements FSucessora {
 
 	private Romenia[] destinos;
 
+	private boolean visited = false;
+	
 	static {
 		ARAD.destinos = new Romenia[] { ZERIND, TIMISSOARA, SIBIU };
 		ZERIND.destinos = new Romenia[] { ARAD, ORADEA };
@@ -39,6 +41,13 @@ public enum Romenia implements FSucessora {
 		List<Romenia> i = Arrays.asList(destinos);
 		Collections.shuffle(i);
 		return (FSucessora[]) i.toArray();	
+	}
+	
+	public boolean isVisited() {
+		return this.visited;
+	}
+	public void setVisited() {
+		this.visited = true;
 	}
 
 }

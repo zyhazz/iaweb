@@ -1,11 +1,6 @@
 package iaweb.runner;
 
 import iaweb.agencia.*;
-import iaweb.agencia.AgenteBFS;
-import iaweb.agencia.AgenteDFS;
-import iaweb.agencia.AgenteDFSIterativo;
-import iaweb.agencia.AgenteDFSLimitado;
-import iaweb.agencia.AgenteDFSVisitados;
 import iaweb.util.Aspirador;
 import iaweb.util.FSucessora;
 import iaweb.util.Node;
@@ -48,6 +43,7 @@ public class Main {
 		
 		//Agente agentedfsiterativo = new AgenteDFSIterativo(origem, destino);
 		Agente agentedfsiterativo = new AgenteDFSIterativo(origemAspirador, destinoAspirador);
+		Agente agentebidirecional = new AgenteBidirecional(origem, destino);
 		/*
 		System.out.println("----- iniciando agente DFS -------");
 		finish(agentedfs);
@@ -75,6 +71,7 @@ public class Main {
 		finish(agentedfsiterativo);
 		System.out.println("----- finalizando agente DFSi -------");
 		*/
+		System.out.println(agentebidirecional.run());
 	}
 
 }

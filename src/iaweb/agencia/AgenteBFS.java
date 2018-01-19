@@ -16,7 +16,7 @@ public class AgenteBFS extends Agente {
 	}
 	@Override
 	public boolean search(Node node) {
-		this.node = node;//marca n� atual
+		this.node = node;//marca nó atual
 		
 		if(node == null) {
 			return false;
@@ -26,8 +26,8 @@ public class AgenteBFS extends Agente {
 		
 		//this.seq.add(node);
 		System.out.println(" queremos " + this.objetivo.toString());
-		if(this.objetivo.contains(this.node.getEstado())) {//se o n� for o objetivo...true
-			this.seq.add(node);//adiciona o ultimo n� pra voltar
+		if(this.objetivo.contains(this.node.getEstado())) {//se o nó for o objetivo...true
+			this.seq.add(node);//adiciona o ultimo nó pra voltar
 			System.out.println("Chegamos.");
 			return true;
 		}else {

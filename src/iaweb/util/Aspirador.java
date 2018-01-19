@@ -11,6 +11,8 @@ public enum Aspirador implements FSucessora {
 	ESS, DSS, ELS, DLS, ESL, DSL, ELL, DLL;
 
 	private Aspirador[] destinos;
+	
+	private boolean visited = false;
 
 	static {
 		ESS.destinos = new Aspirador[] { ELS, DSS, ESS };
@@ -29,6 +31,13 @@ public enum Aspirador implements FSucessora {
 		List<Aspirador> i = Arrays.asList(destinos);
 		Collections.shuffle(i);
 		return (FSucessora[]) i.toArray();	
+	}
+	
+	public boolean isVisited() {
+		return this.visited;
+	}
+	public void setVisited() {
+		this.visited = true;
 	}
 
 }

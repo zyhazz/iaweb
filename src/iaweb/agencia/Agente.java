@@ -16,7 +16,6 @@ public abstract class Agente {
 	public Agente(FSucessora origem, FSucessora[] objetivo) {
 		this.fringe.add(new Node(origem));
 		this.objetivo.addAll(Arrays.asList(objetivo));
-		
 	}
 	
 	public boolean run() {
