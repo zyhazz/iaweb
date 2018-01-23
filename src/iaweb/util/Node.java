@@ -7,6 +7,7 @@ public class Node {
 	private FSucessora estado;
 	private Node pai;
 	private int altura = 0;
+	private int custo = 0;
 	
 	
 	public Node(FSucessora estado) {
@@ -42,5 +43,14 @@ public class Node {
 	}
 	public void setAltura(int altura) {
 		this.altura = altura;
+	}
+	public int getCusto() {
+		return custo;
+	}
+	public void setCusto(int custo) {
+		this.custo = custo;
+	}
+	public void addCusto(int custo) {
+		this.custo += custo;
 	}
 }

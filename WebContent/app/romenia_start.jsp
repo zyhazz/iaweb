@@ -23,6 +23,7 @@
 		<option value="3">DFSVisitados</option>
 		<option value="4">DFSLimitado</option>
 		<option value="5">DFSIterativo</option>
+		<option value="6">Bidirecional</option>
 	</select><br>Limite:
 	<input type="text" name="limite" size="3" value="4">	
 	<button type="submit">Pesquisar rota</button> 

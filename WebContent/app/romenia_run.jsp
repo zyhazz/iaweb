@@ -90,6 +90,7 @@
 
     var itip = null;
     var tip = null;
+    var ttip = null;
         
     var map = null;
       $(document).ready(function() {
@@ -105,37 +106,60 @@
           .html(function(d, i) {
             return "<strong>Cidade:</strong> <span style='color:red'>" + this.id + "</span>";
           })
-      var cities = d3.selectAll('ellipse').call(tip).call(itip);
+      ttip = d3.tip()
+      	  .direction('s')
+          .attr('class', 'd3-tip')
+          .offset([10, 0])
+          .html(function(d, i) {
+            return "<strong>Tail:</strong> <span style='color:red'>" + d + "</span>";
+          })
+      var cities = d3.selectAll('ellipse').call(tip).call(itip).call(ttip);
       //svg.append('rect').attr('width', 100).attr('height', 100).on('mouseover', tip.show).on('mouseout', tip.hide);
       cities.on('mouseover', tip.show).on('mouseout', tip.hide);
 
       map = d3.select('#path');
 
       //doRoute(route);
-	  doRouteList(citiesList);
+      bi_index = citiesList.findIndex(position);
+      
+      if(bi_index < 0){
+	  	  doRouteList(citiesList, false);
+      }else{
+    	  	  head = citiesList.slice(0,bi_index);
+    	  	  tail = citiesList.slice(bi_index + 1, citiesList.length);
+    	  	  doRouteList(head, false);
+    	  	  doRouteList(tail, true);
+      }
+      
     });
     
     function showTip(city){
     	   itip.show(city.toString().toLowerCase(),document.getElementById(city.toString().toLowerCase()));
     }
-    function doRoute(route){
-    	
-      showTip(route[0][0]);
+    function showTipTail(city){
+ 	   ttip.show(city.toString().toLowerCase(),document.getElementById(city.toString().toLowerCase()));
+ 	}
+    function doRoute(route, t){
+    	  if(t){
+    		  showTipTail(route[0][0]);
+    	  }else{
+    	      showTip(route[0][0]);  
+    	  }
       
       route.forEach(function(obj,index,collection) {
               setTimeout(function(){
                   console.log('trip');
                   linkCities(obj[0], obj[1]);
-                  showTip(obj[1]);
+                  t?showTipTail(obj[1]):showTip(obj[1]);
               }, (index + 1) * 1500);
       });
     }
-    function doRouteList(list){
+    function doRouteList(list, t){
     	  routes = [];
 	    	for(i=1;i<list.length;i++){
 	    	   routes.push([list[i-1],list[i]]);
 	    	}
-	    	doRoute(routes);
+	    	doRoute(routes, t);
     }
     function linkCities(city1, city2){
     	  console.log('from', city1, 'to', city2)
@@ -158,6 +182,14 @@
       setTimeout(function(){linkCities('arad', 'sibiu')}, 1000);
       setTimeout(function(){linkCities('sibiu', 'fagaras')}, 2000);
       setTimeout(function(){linkCities('fagaras', 'bucharest')}, 3000);
+    }
+    
+    function position(e,i,a){
+    		if(e == ''){
+    			return true;
+    		}else{
+    			return false;
+    		}
     }
 
     </script>

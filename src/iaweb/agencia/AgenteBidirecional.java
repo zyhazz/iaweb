@@ -12,9 +12,14 @@ import iaweb.util.Romenia;
 
 public class AgenteBidirecional extends Agente {
 	
-	protected List<ArrayList<Node>> fringe = new ArrayList<ArrayList<Node>>();//bidimensional para inicio e fim
-	protected ArrayList<Node> head = new ArrayList<Node>();//bidimensional para inicio e fim
-	protected ArrayList<Node> tail = new ArrayList<Node>();//bidimensional para inicio e fim
+	private List<ArrayList<Node>> fringe = new ArrayList<ArrayList<Node>>();//bidimensional para inicio e fim
+	private ArrayList<Node> head = new ArrayList<Node>();
+	private ArrayList<Node> tail = new ArrayList<Node>();
+	private ArrayList<FSucessora> tailInt = new ArrayList<FSucessora>();
+	private ArrayList<FSucessora> headInt = new ArrayList<FSucessora>();
+	
+	private Node headLink;
+	private Node tailLink;
 	
 	public AgenteBidirecional(FSucessora origem, FSucessora[] objetivo) {
 		super(origem, objetivo);
@@ -30,41 +35,6 @@ public class AgenteBidirecional extends Agente {
 		System.out.println(fringe.toString());
 		// TODO Auto-generated constructor stub
 	}
-	
-	public boolean searchJob(Node node, ArrayList<Node> localFringe) {
-		this.node = node;//marca nó atual
-		
-		if(this.node == null) {
-			return false;
-		}
-		
-		System.out.print("Em " + node.getEstado().toString());
-		
-		//this.seq.add(node);
-		System.out.println(" queremos " + this.objetivo.toString());
-		if(this.objetivo.contains(this.node.getEstado())) {//se o n� for o objetivo...true
-			this.seq.add(node);
-			System.out.println("Chegamos.");
-			return true;
-		}else {
-			System.out.print("vizinhos:");
-			List<FSucessora> destinos = Arrays.asList(this.node.getEstado().getSucessao());
-			for(FSucessora i: destinos) {
-				System.out.print(i.toString() + " ");
-				localFringe.add(new Node(i, node) );
-			}
-			System.out.println();
-			
-			Node t = null;
-			
-			if(localFringe.size() > 0) {//ainda tem o que visitar
-				t = localFringe.remove(0);
-				System.out.println("Removendo " + t.getEstado().toString());
-			}
-			
-			return search(t);
-		}
-	}
 
 	@Override
 	public boolean search(Node node) {
@@ -72,34 +42,93 @@ public class AgenteBidirecional extends Agente {
 		return false;
 	};
 	
+	public ArrayList<Node> getResult(){
+		ArrayList<Node> resultado = new ArrayList<Node>();
+		
+		ArrayList<Node> tmp = getHeadPath();
+		if(tmp != null) {
+			resultado.addAll(tmp);
+		}
+		
+		resultado.add(new Node(null));//separador é um node nulo
+		
+		tmp = getTailPath();
+		if(tmp != null) {
+		resultado.addAll(tmp);
+		}
+		
+		return resultado;
+	}
+	
+	public ArrayList<Node> getResult(Node n) {
+		ArrayList<Node> sequencia = new ArrayList<Node>();
+		Node i;
+		if(n != null) {
+			sequencia.add(n);
+			i = n.getPai();	
+		}else {
+			return null;
+		}
+		while(i != null) {
+			sequencia.add(i);
+			i = i.getPai();
+		}
+		Collections.reverse(sequencia);
+		return sequencia;
+	}
+	
+	public ArrayList<Node> getHeadPath() {
+		return getResult(headLink);
+	}
+	
+	public ArrayList<Node> getTailPath() {
+		return getResult(tailLink);
+	}
+	
+	
+	public Node findLink(ArrayList<Node> haystack, FSucessora needle) {
+		for(Node i:haystack) {
+			if(i.getEstado() == needle) {
+				return i;
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public boolean run() {
 		
 		while(!head.isEmpty() && !tail.isEmpty()) {
 			if(!head.isEmpty()) {
 				node = head.remove(0);
-				for(FSucessora i: node.getEstado().getSucessao()) {
-					if(i.isVisited()) {
-						System.out.println("encontramos um visitado");
-						return true;
-					}else {
+				System.out.println("head:" + node.getEstado().toString());
+				
+				if(tailInt.contains(node.getEstado())) {
+					System.out.println("encontramos um visitado na cabeca");
+					headLink = new Node(node.getEstado(), node);
+					tailLink = findLink(tail, node.getEstado());
+					return true;
+				}else {
+					for(FSucessora i:node.getEstado().getSucessao()) {
 						head.add(new Node(i, node));
-						i.setVisited();
-						System.out.println("head:" + i.toString());
 					}
+					headInt.add(node.getEstado());
 				}
 			}
 			if(!tail.isEmpty()) {
 				node = tail.remove(0);
-				for(FSucessora i: node.getEstado().getSucessao()) {
-					if(i.isVisited()) {
-						System.out.println("encontramos um visitado");
+				System.out.println("tail:\t\t" + node.getEstado().toString());
+					if(headInt.contains(node.getEstado())) {
+						System.out.println("encontramos um visitado na cauda");
+						headLink = findLink(head, node.getEstado());
+						tailLink = new Node(node.getEstado(), node);
 						return true;
 					}else {
-						tail.add(new Node(i, node));
-						i.setVisited();
-						System.out.println("tail:" + i.toString());
-					}
+						for(FSucessora i:node.getEstado().getSucessao()) {
+							tail.add(new Node(i, node));
+						}
+						tailInt.add(node.getEstado());
+					
 				}
 			}
 		}

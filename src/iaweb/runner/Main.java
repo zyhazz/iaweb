@@ -43,7 +43,10 @@ public class Main {
 		
 		//Agente agentedfsiterativo = new AgenteDFSIterativo(origem, destino);
 		Agente agentedfsiterativo = new AgenteDFSIterativo(origemAspirador, destinoAspirador);
+		
 		Agente agentebidirecional = new AgenteBidirecional(origem, destino);
+		
+		Agente agentecustouniforme = new AgenteCustoUniforme(origem, destino);
 		/*
 		System.out.println("----- iniciando agente DFS -------");
 		finish(agentedfs);
@@ -71,7 +74,12 @@ public class Main {
 		finish(agentedfsiterativo);
 		System.out.println("----- finalizando agente DFSi -------");
 		*/
-		System.out.println(agentebidirecional.run());
+		//System.out.println(agentebidirecional.run());
+		
+		//System.out.println(agentebidirecional.getResult().toString());
+		
+		System.out.println(agentecustouniforme.run());
+		
 	}
 
 }

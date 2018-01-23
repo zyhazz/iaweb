@@ -8,5 +8,6 @@ public interface FSucessora {
 	
 	public boolean isVisited(); 
 	public void setVisited();
+	public int getCusto();
 
 }

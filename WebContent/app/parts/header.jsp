@@ -34,8 +34,18 @@
         text-align: center;
       }
       .d3-tip.n:after {
-        margin: -1px 0 0 0;
-        top: 100%;
-        left: 0;
-      }
+	  content: "\25BC";
+	  margin: -1px 0 0 0;
+	  top: 100%;
+	  left: 0;
+	  text-align: center;
+	}
+	/* Southward tooltips */
+	.d3-tip.s:after {
+	  content: "\25B2";
+	  margin: 0 0 1px 0;
+	  top: -10px;
+	  left: 0;
+	  text-align: center;
+	}
     </style>
