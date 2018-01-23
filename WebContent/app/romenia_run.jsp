@@ -3,7 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <h1>Rotas na Romênia</h1>
 <div align="center">
+	<c:choose>
+	<c:when test="${tipo == 9 || tipo == 8}"><h2>Caminho de ${origem } para BUCHAREST usando ${agenteTipo}</h2></c:when>
+	<c:otherwise>
 	<h2>Caminho de ${origem } para ${destino } usando ${agenteTipo}<c:if test="${tipo==4 }"> com limite ${limite }</c:if></h2>
+	</c:otherwise>
+	</c:choose>
 	<c:choose>
 	<c:when test="${sucesso}">
 		<div class="well">

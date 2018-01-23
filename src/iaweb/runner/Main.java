@@ -11,7 +11,7 @@ public class Main {
 	
 	private static void finish(Agente a) {
 		if(a.run()) {
-			System.out.println("----- Rota -------");
+			System.out.println("-----    Rota     -------");
 			for(Node i : a.getResult()) {
 				System.out.println(i.getEstado().toString());
 			}
@@ -25,6 +25,8 @@ public class Main {
 		FSucessora origem = Romenia.ARAD;
 		
 		FSucessora[] destino = {Romenia.BUCHAREST};
+		
+		FSucessora[] bucharest = {Romenia.BUCHAREST};
 		
 		FSucessora origemAspirador = Aspirador.ESS;
 		
@@ -48,6 +50,9 @@ public class Main {
 		Agente agentebidirecional = new AgenteBidirecional(origem, destino);
 		
 		Agente agentecustouniforme = new AgenteCustoUniforme(origem, destino);
+		
+		Agente agentegulosoheuristico = new AgenteGulosoHeuristico(origem, bucharest);
+		Agente agenteastar = new AgenteAStar(origem, bucharest);
 		/*
 		System.out.println("----- iniciando agente DFS -------");
 		finish(agentedfs);
@@ -79,7 +84,9 @@ public class Main {
 		
 		//System.out.println(agentebidirecional.getResult().toString());
 		
-		System.out.println(agentecustouniforme.run());
+		//System.out.println(agentecustouniforme.run());
+		
+		finish(agenteastar);
 
 		
 	}

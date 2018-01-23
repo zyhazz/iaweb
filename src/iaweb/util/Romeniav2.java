@@ -39,6 +39,27 @@ public class Romeniav2{
 		gmap.addRouteBetweenCities(Romenia.VASLUI, Romenia.IASI, 92);
 		gmap.addRouteBetweenCities(Romenia.IASI, Romenia.NEAMT, 87);
 		
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.ARAD, 366);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.BUCHAREST, 0);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.CRAIOVA, 160);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.DOBRETA, 242);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.EFORIE, 161);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.FAGARAS, 178);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.GIURGIU, 77);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.HIRSOVA, 151);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.IASI, 226);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.LUGOJ, 244);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.MEHADIA, 241);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.NEAMT, 234);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.ORADEA, 380);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.PITESTI, 98);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.RIMNICU_VILCEA, 193);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.SIBIU, 253);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.TIMISSOARA, 329);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.URZICENI, 80);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.VASLUI, 199);
+		gmap.addHeuristicbetweenCities(Romenia.BUCHAREST, Romenia.ZERIND, 374);
+		
 	}
 	
 	public Map getMap() {

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 public class Map {
 	
 	private List<Route> map = new ArrayList<Route>();
+	private List<Route> heuristic = new ArrayList<Route>();
 	
 	private void addRoute(Route route) {
 		map.add(route);
@@ -15,6 +16,10 @@ public class Map {
 	public void addRouteBetweenCities(FSucessora from, FSucessora to, int distance) {
 		this.addRoute(new Route(from, to, distance));
 		this.addRoute(new Route(to, from, distance));
+	}
+	
+	public void addHeuristicbetweenCities(FSucessora from, FSucessora to, int distance) {
+		heuristic.add(new Route(from, to, distance));
 	}
 
 	public List<FSucessora> getLocations() {
@@ -41,7 +46,16 @@ public class Map {
 			     .map(p -> p.getDistance())
 			     .collect(Collectors.toList());
 		
-		return filtro.get(0);
+		return filtro.size() != 0?filtro.get(0):null;
+	}
+	public int getHeuristic(FSucessora fSucessora, FSucessora i) {
+		
+		List<Integer> filtro = heuristic.stream()
+			     .filter(item -> item.getFrom().equals(fSucessora) && item.getTo().equals(i))
+			     .map(p -> p.getDistance())
+			     .collect(Collectors.toList());
+		
+		return filtro.size() != 0?filtro.get(0):null;
 	}
 
 }

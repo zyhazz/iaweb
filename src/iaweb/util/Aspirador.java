@@ -40,4 +40,10 @@ public enum Aspirador implements FSucessora {
 		this.visited = true;
 	}
 
+	@Override
+	public int getCusto() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

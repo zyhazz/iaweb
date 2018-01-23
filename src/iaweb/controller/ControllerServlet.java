@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import iaweb.agencia.Agente;
+import iaweb.agencia.AgenteAStar;
 import iaweb.agencia.AgenteBFS;
 import iaweb.agencia.AgenteBidirecional;
 import iaweb.agencia.AgenteCustoUniforme;
@@ -17,6 +18,7 @@ import iaweb.agencia.AgenteDFS;
 import iaweb.agencia.AgenteDFSIterativo;
 import iaweb.agencia.AgenteDFSLimitado;
 import iaweb.agencia.AgenteDFSVisitados;
+import iaweb.agencia.AgenteGulosoHeuristico;
 import iaweb.util.Aspirador;
 import iaweb.util.FSucessora;
 import iaweb.util.Node;
@@ -91,6 +93,7 @@ public class ControllerServlet extends HttpServlet {
 		int limite = Integer.parseInt(request.getParameter("limite"));
 		FSucessora origem = Romenia.valueOf(origemstr);
 		FSucessora destino[] = { Romenia.valueOf(destinostr) };
+		FSucessora bucharest[] = { Romenia.BUCHAREST };
 		Agente agente;
 		String agenteTipo;
 		switch (tipo) {
@@ -121,6 +124,14 @@ public class ControllerServlet extends HttpServlet {
 		case 7:
 			agente = new AgenteCustoUniforme(origem, destino);
 			agenteTipo = "Agente de Custo Uniforme";
+			break;
+		case 8:
+			agente = new AgenteGulosoHeuristico(origem, bucharest);
+			agenteTipo = "Agente Guloso Heuristico";
+			break;
+		case 9:
+			agente = new AgenteAStar(origem, bucharest);
+			agenteTipo = "Agente A*";
 			break;
 
 		default:

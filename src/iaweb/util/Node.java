@@ -8,6 +8,7 @@ public class Node implements Comparable<Node> {
 	private Node pai;
 	private int altura = 0;
 	private int custo = 0;
+	private Map heuristic = null;
 	
 	
 	public Node(FSucessora estado) {
@@ -53,9 +54,16 @@ public class Node implements Comparable<Node> {
 	public void addCusto(int custo) {
 		this.custo += custo;
 	}
+	public void setHeuristic(Map map) {
+		this.heuristic = map;
+	}
 	@Override
 	public int compareTo(Node o) {
+		if(this.heuristic != null) {
 		// TODO Auto-generated method stub
-		return (this.custo - o.custo);
+			return (custo + heuristic.getHeuristic(Romenia.BUCHAREST, this.getEstado())) - (o.getCusto() + heuristic.getHeuristic(Romenia.BUCHAREST, o.getEstado()));
+		}else {
+			return (this.custo - o.custo);
+		}
 	}
 }
