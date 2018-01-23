@@ -5,6 +5,7 @@ import iaweb.util.Aspirador;
 import iaweb.util.FSucessora;
 import iaweb.util.Node;
 import iaweb.util.Romenia;
+import iaweb.util.Romeniav2;
 
 public class Main {
 	
@@ -79,6 +80,7 @@ public class Main {
 		//System.out.println(agentebidirecional.getResult().toString());
 		
 		System.out.println(agentecustouniforme.run());
+
 		
 	}
 

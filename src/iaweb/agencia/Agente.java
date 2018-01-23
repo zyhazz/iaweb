@@ -20,7 +20,7 @@ public abstract class Agente {
 	
 	public boolean run() {
 		// TODO Auto-generated method stub
-		return this.search(fringe.get(0));
+		return this.search(fringe.remove(0));
 	}
 
 	public abstract boolean search(Node node);

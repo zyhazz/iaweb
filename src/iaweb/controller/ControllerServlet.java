@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import iaweb.agencia.Agente;
 import iaweb.agencia.AgenteBFS;
 import iaweb.agencia.AgenteBidirecional;
+import iaweb.agencia.AgenteCustoUniforme;
 import iaweb.agencia.AgenteDFS;
 import iaweb.agencia.AgenteDFSIterativo;
 import iaweb.agencia.AgenteDFSLimitado;
@@ -116,6 +117,10 @@ public class ControllerServlet extends HttpServlet {
 		case 6:
 			agente = new AgenteBidirecional(origem, destino);
 			agenteTipo = "Agente Bidirecional";
+			break;
+		case 7:
+			agente = new AgenteCustoUniforme(origem, destino);
+			agenteTipo = "Agente de Custo Uniforme";
 			break;
 
 		default:

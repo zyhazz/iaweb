@@ -1,22 +1,21 @@
 package iaweb.agencia;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import iaweb.agencia.Agente;
 import iaweb.util.FSucessora;
+import iaweb.util.Map;
 import iaweb.util.Node;
-import iaweb.util.Romenia;
+import iaweb.util.Romeniav2;
 
 public class AgenteCustoUniforme extends Agente {
 	
+	Map romeniav2 = new Romeniav2().getMap();
 	
 	public AgenteCustoUniforme(FSucessora origem, FSucessora[] objetivo) {
 		super(origem, objetivo);
 		
-		System.out.println(fringe.toString());
 		// TODO Auto-generated constructor stub
 	}
 
@@ -38,14 +37,18 @@ public class AgenteCustoUniforme extends Agente {
 			return true;
 		}else {
 			System.out.print("vizinhos:");
-			List<FSucessora> destinos = Arrays.asList(this.node.getEstado().getSucessao());
+			List<FSucessora> destinos = this.romeniav2.getNextLocations(node.getEstado());
 			for(FSucessora i: destinos) {
-				System.out.print(i.toString() + "("+ i.getCusto() +") ");
+				int custo = romeniav2.getDistance(node.getEstado(), i);
+				System.out.print(i.toString() + "("+ custo +"," + node.getCusto() + ") ");
 				Node n = new Node(i, node);
-				n.addCusto(i.getCusto());
-				fringe.add(0, n);
+				n.addCusto(node.getCusto()); //adiciona o custo do pai
+				n.addCusto(custo); //adiciona o custo da ultima viagem
+				fringe.add(n);
 			}
 			System.out.println();
+
+			Collections.sort(fringe);
 			
 			Node t = null;
 			

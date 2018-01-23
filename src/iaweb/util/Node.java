@@ -3,7 +3,7 @@ package iaweb.util;
 import iaweb.util.FSucessora;
 import iaweb.util.Node;
 
-public class Node {
+public class Node implements Comparable<Node> {
 	private FSucessora estado;
 	private Node pai;
 	private int altura = 0;
@@ -52,5 +52,10 @@ public class Node {
 	}
 	public void addCusto(int custo) {
 		this.custo += custo;
+	}
+	@Override
+	public int compareTo(Node o) {
+		// TODO Auto-generated method stub
+		return (this.custo - o.custo);
 	}
 }
