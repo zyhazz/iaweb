@@ -19,7 +19,6 @@ public abstract class Agente {
 	}
 	
 	public boolean run() {
-		// TODO Auto-generated method stub
 		return this.search(fringe.remove(0));
 	}
 

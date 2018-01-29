@@ -13,7 +13,7 @@ public class Main {
 		if(a.run()) {
 			System.out.println("-----    Rota     -------");
 			for(Node i : a.getResult()) {
-				System.out.println(i.getEstado().toString());
+				System.out.println(i.getEstado() != null?i.getEstado().toString():"separador");
 			}
 			System.out.println("----- Fim da rota -------");
 		}
@@ -86,7 +86,7 @@ public class Main {
 		
 		//System.out.println(agentecustouniforme.run());
 		
-		finish(agenteastar);
+		finish(agentebidirecional);
 
 		
 	}

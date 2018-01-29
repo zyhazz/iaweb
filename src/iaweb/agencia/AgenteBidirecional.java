@@ -32,7 +32,7 @@ public class AgenteBidirecional extends Agente {
 			tail.add(new Node(i));
 		}
 		
-		System.out.println(fringe.toString());
+		//System.out.println(fringe.toString());
 		// TODO Auto-generated constructor stub
 	}
 
@@ -65,7 +65,7 @@ public class AgenteBidirecional extends Agente {
 		Node i;
 		if(n != null) {
 			sequencia.add(n);
-			i = n.getPai();	
+			i = n.getPai();
 		}else {
 			return null;
 		}
@@ -95,7 +95,61 @@ public class AgenteBidirecional extends Agente {
 		return null;
 	}
 	
-	@Override
+	public boolean run_x() {
+		tailInt = new ArrayList<FSucessora>();
+		headInt = new ArrayList<FSucessora>();
+		
+		System.out.print("head_I:" + headInt.size());
+		System.out.println("tail_I:" + tailInt.size());
+		
+		while(!head.isEmpty() && !tail.isEmpty()) {
+			System.out.print("headz:" + head.size());
+			System.out.println("tailz:" + tail.size());
+
+			if(!head.isEmpty()) {
+				node = head.remove(0);
+				if(tailInt.contains(node.getEstado())) {
+					headLink = new Node(node.getEstado(), node);
+					tailLink = findLink(tail, node.getEstado());
+					return true;
+				}else {	
+					System.out.println("HEAD:" + node.getEstado());
+					headInt.add(node.getEstado());
+					for(FSucessora i:node.getEstado().getSucessao()) {
+						if(!headInt.contains(i)) {
+							head.add(new Node(i, node));
+							tailInt.add(node.getEstado());
+						}else {
+							System.out.println("duplicado head:" + i);
+						}
+					}
+				}
+			}
+			if(!tail.isEmpty()) {
+				node = tail.remove(0);
+				if(headInt.contains(node.getEstado())) {
+					headLink = findLink(head, node.getEstado());
+					tailLink = new Node(node.getEstado(), node);
+					return true;
+				}else {
+					if(!headInt.contains(node.getEstado())) {
+						System.out.println("TAIL:\t\t" + node.getEstado());
+						headInt.add(node.getEstado());
+						for(FSucessora i:node.getEstado().getSucessao()) {
+							tail.add(new Node(i, node));
+							tailInt.add(node.getEstado());
+						}
+					}else {
+						System.out.println("duplicado tail");
+					}
+				}
+			}
+		}
+		System.out.println("head n tail empty");
+		return false;
+	}
+	
+
 	public boolean run() {
 		
 		while(!head.isEmpty() && !tail.isEmpty()) {
@@ -105,7 +159,8 @@ public class AgenteBidirecional extends Agente {
 				
 				if(tailInt.contains(node.getEstado())) {
 					System.out.println("encontramos um visitado na cabeca");
-					headLink = new Node(node.getEstado(), node);
+					headLink = node;
+					//headLink = new Node(node.getEstado(), node);
 					tailLink = findLink(tail, node.getEstado());
 					return true;
 				}else {
@@ -121,7 +176,8 @@ public class AgenteBidirecional extends Agente {
 					if(headInt.contains(node.getEstado())) {
 						System.out.println("encontramos um visitado na cauda");
 						headLink = findLink(head, node.getEstado());
-						tailLink = new Node(node.getEstado(), node);
+						tailLink = node;
+						//tailLink = new Node(node.getEstado(), node);
 						return true;
 					}else {
 						for(FSucessora i:node.getEstado().getSucessao()) {
